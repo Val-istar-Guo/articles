@@ -1,0 +1,78 @@
+# git为何会忽略icon文件（夹）
+
+当在mac系统下使用git add 的时候，系统会自动的忽略icon文件夹。
+
+    > [Val.istar.Guo@BlogArticle]$ git add icon
+    The following paths are ignored by one of your .gitignore files:
+    icon
+
+这时，如果换一个项目，创建的icon文件夹依然会被git忽略。而```.gitignore```内并没有添加有关忽略icon文件夹相关的内容。同时，也并没有主动的配置过全局忽略。真是百思不得解。
+或许这是一种比较少见的情况，但是为何icon这么一个常见的命名会被忽略，而且是全局性的。
+
+后来发现一个不常见的命令```git check-ignore -v <path>```命令来查找ignore的文件路径
+
+    > [Val.istar.Guo@BlogArticle]$ git check-ignore -v icon
+    /Users/quessir/.config/git/ignore:9:Icon	icon
+
+
+然后打开这个文件来查看一下详细信息
+
+    # Automatically created by GitHub for Mac
+    # To make edits, delete these initial comments, or else your changes may be lost!
+
+    *.DS_Store^M
+    .AppleDouble^M
+    .LSOverride^M
+    ^M
+    # Icon must end with two \r^M
+    Icon^M
+    ^M
+    ^M
+    # Thumbnails^M
+    ._*^M
+    ^M
+    # Files that might appear in the root of a volume^M
+    .DocumentRevisions-V100^M
+    .fseventsd^M
+    .Spotlight-V100^M
+    .TemporaryItems^M
+    .Trashes^M
+    .VolumeIcon.icns^M
+    .com.apple.timemachine.donotpresent^M
+    ^M
+    # Directories potentially created on remote AFP share^M
+    .AppleDB^M
+    .AppleDesktop^M
+    Network Trash Folder^M
+    Temporary Items^M
+    .apdisk^M
+
+从说明中就明显看出来名堂，这时github为mac安装的全局忽略，然而...我并不知情。
+为何是GitHub安装的呢，我猜应该是安装了GitHub Desktop app了。就是他
+
+** there is link **
+
+详细看了文件内容会发现作怪的一句
+
+    # Icon must end with two \r^M
+    Icon^M
+
+既然找到作怪的地方，但是却不敢删，因为github不会无端写这么一句话。
+
+又经过一段时间查阅和实验，猜找到Icon这个罪魁祸首的来源。
+当用户修改文件夹图标时，会在文件夹下创建一个名为```Icon\r```的文件。
+
+    > [Val.istar.Guo@icontest]$ ls
+    Icon?
+
+这里显示的```Icon?```就是我说的```Icon\r```这里的原因可以参考   ** there is link **
+
+后来也发现，其实这个全局的忽略的配置也是很多人自己使用的模板。
+至此，终于真相大白。回头来想，达成这个成就需要以下几点。
+
+1. 安装了GitHub Desktop
+2. 自己没有用相似的模板设置git全局ignore
+3. 文件夹以```icon```命名
+4. 我的系统磁盘格式是 Mac OS (扩展 日志式 忽略大小写) 或许也有关系，由于文件命名是不区分大小写的。
+
+解锁成就有点复杂，或许这也是没能google到原因吧。分享给大家，注意GitHub Desktop app给埋下的坑。（他以为他是为了我好）
