@@ -7,6 +7,9 @@
 
 读这篇文章前，你必须要了解的内容有: Vue, Koa, Webpack, Babel
 
+可以下载[Github仓库](https://github.com/Val-istar-Guo/vue-boilerplate)
+以供阅读文章参考或提出修改建议。
+
 
 
 ## 功能需求
