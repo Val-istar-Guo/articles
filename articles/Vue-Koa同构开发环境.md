@@ -42,20 +42,13 @@ Vue 具有极好的生态环境，我们可以直接使用`vue-server-renderer`�
 
 `vue-ssr-bundle.json` 文件是通过`vue-ssr-webpack-plugin`生成的 Client 端代码（具体编译成的内容意义我也不清楚）。这样我们就不需要在 Server 端引入 Client 端代码，再去渲染。仅仅需要将 `vue-ssr-webpack-plugin` 生成的`vue-ssr-bundle.json`文件内容作为参数传入 `createBundleRenderer()` 方法，就可以得到 Client 端 HTML 的渲染结果。
 
-### 独立的 HTML 模板
-
-虽然 `vue-server-renderer` 支持 模版，可以将生成的 HTML 代码嵌入其中，但是我并不喜欢将HTML写入JS，有一下几个缺点：
-
-1. 修改和编辑时没有高亮
-2. 不能使用 ejs 等其他模版语言
-
-因此，我将`view/index.html`作为模版，通过`html-webpack-plugin`将webpack提取的独立 css、js 文件作为`<link>`或`<script>`写入模板文件，并生成一个文件 `index.dev.html/index.prod.html`（根据环境）。最后，通过 `koa-views` 使用 `vue-server-renderer` 生成的 Client 端 HTML 作为参数、`index.dev.html/index.prod.html`作为模板生成最终的HTML返回给 Client 端。
+更具体的说明请移步[Vue Server Side Render文档](https://ssr.vuejs.org/zh/)。文档中对通过Vue实现服务端渲染有详细对说明。本项目参照其基本结构搭建客户端部分代码，如果你初次接触这部分，可能对`entry-ssr.js`、`entry-client.js`、`createRouter.js`等文件的结构和写法疑惑不解，甚至怀疑这些文件存在的必要性，不过在[Vue Server Side Render文档](https://ssr.vuejs.org/zh/)中都对其进行了详细解释。
 
 
 
 ## 兼容非同构模块使用
 
-虽然 `vue-server-renderer` 虽然使用方法非常便捷而神奇，但是依旧不能自动的支持非同构的 JS 代码在Server端运行。例如，如果你使用`Chart.js^2.5.0`（一个小巧的图标绘制插件），将会报错`Cannot Find xxx from undefined`。这里是由于未定义的变量`window`导致的。我们都明白，`window`是 浏览器中的变量自然不可能出现在NodeJS环境中。但是放着如此不错的插件不用，未免太可惜了。
+虽然 `vue-server-renderer` 虽然使用方法非常便捷而神奇，但是依旧不能自动的支持非同构的 JS 代码在Server端运行。例如，如果你使用`Chart.js^2.5.0`（一个小巧的图标绘制插件），将会报错`Cannot Find xxx from undefined`。这里是由于未定义的变量`window`导致的。我们都知道，`window`是浏览器中的变量而NodeJS环境中并不存在。在服务端运行这样的代码是不可能的，但放着如此不错的插件不用，未免太可惜了。
 
 我们可以通过一个折衷的方法，通过在生成ssr所使用的webpack配置文件中设定别名，将模块指向一个代替模块。默认代替模块为`empty.js`，webpack 配置如下：
 
@@ -79,7 +72,7 @@ export default null;
 ```
 
 ```javascript
-// webpack.config.client.js & webpack.config.dev.js
+// webpack.config.client.js & webpack.config.client.dev.js
 {
   // More Config...
   resolve: {
@@ -106,13 +99,44 @@ if (Chart !== null) {
 
 虽然这样处理并不优雅，至少能解决燃眉之急。最佳的方案还是选择一些同构的模块，这仅仅作为一个应急方案。
 
-在这个模版中，文件`webpack.config.base.js`中导出了一个对象`NON_ISOMORPHIC_NODE_MODULES`用来设定非同构的模块映射。文件`webpack.config.ssr.js`会自动读取这个变量用于生成别名。可以将上面代码改为：
+
+由于webpack有许多需要根据项目灵活控制的部分。为了方便管理，我们将这部分统一放置在`webpack.config.expand.js`文件中。server/client/ssr等部分的webpack配置均从此文件中导入响应配置。
 
 ```javascript
-// webpack.config.base.js
-export const NON_ISOMORPHIC_NODE_MODULES = {
-  chart: 'chart.js',
-};
+import path from 'path';
+
+
+// 扩展配置
+export default {
+  ssrFileName: 'vue-ssr-bundle.json',
+  manifestFileName: 'vue-ssr-manifest.json',
+  /**
+   * 非同构模块, 不可用于ssr在server端运行
+   * 会被默认替代为empty.js
+   * 需要在代码中进行兼容处理
+   */
+  nonIsomorphicModule: {
+    // chart: 'chart.js',
+  },
+
+  // 非JS模块，不可用于ssr, ssr代码需要在nodejs中运行
+  nonJsModule: [
+    'normalize.css',
+  ],
+
+  // 外部依赖库，打包成独立js包
+  lib: [
+    'vue',
+    'vuex',
+    'vue-router',
+    'detect-env',
+    'superagent',
+  ],
+
+  alias: {
+    framework: path.resolve(__dirname, '../framework'),
+  },
+}
 ```
 
 
@@ -135,11 +159,9 @@ PM2提供来快速部署的方法，如果你想详细了解如何使用，最�
 
 ### 默认别名
 
-在这个模版中，根目录中的目录`contants/`与`utils/`分别用于存放在 Server 端和 Client 端都会使用的公共静态变量和工具模块。为了方便使用，在两端都设置了别名(与文件名相同)。
+在这个模版中，`framework`分别用于存放在 Server 端和 Client 端都会使用的公共静态变量和工具模块。为了方便使用，在两端都设置了别名(framework)。
 
-在开发环境下，由于启动的是`/bin/server.dev.js`，Server代码并没有经过 webpack 处理，别名并没有被添加。因此，这里使用 `app-module-path` 模块添加别名。如果使用者也想在 Server 端添加更多别名。也不得不在修改`webpack.config.server.js`的同时，一并修改`/bin/server.dev.js`的少量内容。
-
-如果可以，希望能够找到更好的解决方案。
+由于引入了webpack的别名机制，server端代码必须经过webpack编译后运行。在这里，`build/server.dev.js`帮我们进行了server端代码端编译和运行。因此`webpack.config.expand.js`中配置对别名对于server端也是生效的。
 
 
 
@@ -152,4 +174,10 @@ PM2提供来快速部署的方法，如果你想详细了解如何使用，最�
 ### yarn or npm 安装依赖时被随机kill
 
 使用PM2部署时会首先安装需要的依赖，在使用`yarn`或`npm i`时，可能会提示被kill掉，导致部署失败。这很可能时由于你租用的服务器内存太小的缘故（本项目的依赖稍多）。作者使用的是 1核1G的 的CentOS，通过添加一个 1G 的swap 可以解决这个问题。
+
+### nonJsModule 配置问题
+
+在 webpack.config.expand.js 中存在一个字段为`nonJsModule`。它含义是在server端无法直接运行，但是在client端需要的文件，最明显的例子就是css文件。由于服务端渲染端缘故，client端代码将专名打包并在服务端运行。默认情况下，为了使ssr部分端client端打包文件尽可能小，会自动的移除package.json中指明的依赖。
+
+我们不难想到，之所以可以在client端直接import css文件是因为有webpack端loader做处理。如果ssr部分移除了package.json指明的依赖，这些依赖也将不会被loader处理，而原生的nodejs并不能直接解析／读取CSS文件。因此，如果在package.json指明的依赖不是可以在node环境中直接运行的文件，则这些文件需要被webpack处理并一起打包到ssr端的运行文件中去。
 
