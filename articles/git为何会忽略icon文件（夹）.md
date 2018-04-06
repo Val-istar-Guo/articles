@@ -69,9 +69,10 @@
 1. 修改文件夹图标（[操作指南](https://support.apple.com/kb/PH13922?locale=zh_CN&viewlocale=zh_CN)）
 2. 查看文件夹下内容
 
-
-    > [Val.istar.Guo@icontest]$ ls
-    Icon?
+```bash
+> [Val.istar.Guo@icontest]$ ls
+Icon?
+```
 
 这里插播一段网上回答解释```Icon?```为何带有小尾巴'?'：
 
