@@ -1,0 +1,3 @@
+hooks:
+  pre-commit: 'node ./formatCheck.js'
+  commit-msg: 'commitlint -E HUSKY_GIT_PARAMS'
