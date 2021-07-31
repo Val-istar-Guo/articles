@@ -4,13 +4,13 @@
   "description": "article val.istar.guo articles",
   "main": "index.md",
   "dependencies": {
-    "chalk": "^2.4.1",
-    "ramda": "^0.25.0",
     "@commitlint/cli": "^7.2.0",
     "@commitlint/config-conventional": "^7.1.2",
+    "chalk": "^2.4.1",
     "commitizen": "^3.0.2",
     "cz-conventional-changelog": "^2.1.0",
     "husky": "^1.1.1",
+    "ramda": "^0.25.0",
     "standard-version": "^8.0.1"
   },
   "devDependencies": {},
