@@ -22,7 +22,7 @@
 
 实际上，我们是在模拟一个原生列表的实现。我们的模块结构基本上与列表无异。
 
-![Picker结构](../images/drawio.svg)
+![Picker结构](./assets/DataPicker的Picker/drawio.svg)
 
 完整的实现列表功能难度是非常大的。但是 picker 允许我们将一些地方简化，比如固定 item 高度！
 
@@ -42,7 +42,7 @@
 
 我们将 List 列表顶部距离列表哪第一个元素的距离成为 offset。这样说这几个属性比较抽象。看图：
 
-![Picker模拟滚动示意图](../images/rolling.svg)
+![Picker模拟滚动示意图](./assets/DataPicker的Picker/rolling.svg)
 
 在图片中，为了能够区分 item，item 与 List 之间，item 与 item 直接是有边距的，实际开发中，是没有这个边距的。所以`index: 2`的`top`为 0。
 
@@ -97,7 +97,7 @@
   但是：由于 Picker 往往展示在手机下方，用户视角会导致用户看`上一个item`距离中心更近。
   因此，我们需要`五舍，大于五入`。可以通过`offset - 1`来实现这个效果。
 
-  ![恰好为中间点的特殊情况](../images/autoCenter.svg)
+  ![恰好为中间点的特殊情况](./assets/DataPicker的Picker/autoCenter.svg)
 
 最终我们得到最接近中心的`indexC`为`Math.round((offset - 1) / itemHeight + 1)`。
 
@@ -134,7 +134,7 @@
 
 visibleOffset 理论上应当是 realOffset 的一个映射。按照 IOS 效果，这个映射函数图像应当是：
 
-![IOS映射效果图](../images/iosOffset.svg)
+![IOS映射效果图](./assets/DataPicker的Picker/iosOffset.svg)
 
 我们可以看到`realOffset => visibleOffset`是的映射是一个三段函数。
 
@@ -142,7 +142,7 @@ visibleOffset 理论上应当是 realOffset 的一个映射。按照 IOS 效果�
 
 得到标准的粘性效果之后，我们再来处理那些逗比用户。我们需要将我们的三段映射函数改变的近似于：
 
-![处理逗比的函数映射效果图](../images/doubiOffset.svg)
+![处理逗比的函数映射效果图](./assets/DataPicker的Picker/doubiOffset.svg)
 
 我们可以将超过区间的映射函数从线性改成一个具有极限的，增长速度逐渐变缓，最终不断接近一个极值的函数 fn。
 
