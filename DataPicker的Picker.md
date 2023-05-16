@@ -1,9 +1,10 @@
 ---
 description: Picker 作为 DataPicker 中的一列。它的质量，决定了 DataPicker 的质量。也是最复杂的一部分。
+tags:
+  - 前端
 ---
 
 # DataPicker 的 Picker
-
 
 ## 为什么复杂
 
