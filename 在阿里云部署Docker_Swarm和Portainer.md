@@ -1,11 +1,11 @@
 ---
-description: 若缺乏得力工具，个人开发者想要维护数个网站就心有余而力不足了。这不仅仅需要花费不少精力开发，更困难的是保持不间断的维护。本文记载了如何使用`Docker`与`Portainer`搭建迷你集群并部署各类服务。
+description: 若缺乏得力工具，个人开发者想要维护数个网站就心有余而力不足了。这不仅仅需要花费不少精力开发，更困难的是保持不间断的维护。本文记载了如何使用`Docker Swarm`与`Portainer`搭建迷你集群并部署各类服务。
 tags:
   - 运维
-  - docker
+  - Docker
 ---
 
-# 一个人的运维
+# 在阿里云部署Docker Swarm和Portainer
 
 [Docker]: https://www.docker.com
 [Docker Swarm]: https://docs.docker.com/engine/swarm/
