@@ -25,7 +25,7 @@ This is a test paragraph: *italic*, **bold**, `code`.
 | Left | Right | Center |
 |:-----|------:|:------:|
 | left | right | center |
-| 左   ｜ 右    ｜ 中     |
+| 左   | 右    | 中     |
 
 ## 代码语法
 
