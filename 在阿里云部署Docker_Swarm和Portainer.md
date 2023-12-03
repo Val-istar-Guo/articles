@@ -110,15 +110,15 @@ docker stack deploy -c portainer-agent-stack.yml portainer
 
 部署完成后，我们需要将所有的服务与[Nginx Proxy Manager][Nginx Proxy Manager]连接入同一个[Network](https://docs.docker.com/network/overlay/)。首先我们进入[Portainer][Portainer]创建一个新的 Network：
 
-![](./assets//一个人的运维/create_network.png)
+![](./assets/一个人的运维/create_network.png)
 
 然后我们需要将所有服务都添加到新的 Network：
 
-![](./assets//一个人的运维/change_network.png)
+![](./assets/一个人的运维/change_network.png)
 
 最后，我们进入[Nginx Proxy Manager][Nginx Proxy Manager]添加配置：
 
-![](./assets//一个人的运维/nginx_proxy.png)
+![](./assets/一个人的运维/nginx_proxy.png)
 
 > 在同一个 Network 中的服务可以通过服务的 Service Name 访问其他服务。
 
@@ -143,11 +143,11 @@ docker swarm join --token $TOKEN $ADVERTISE_ADDR
 
 添加好节点后，进入[Portainer][Portainer]可以给节点添加 Label：
 
-![](./assets//一个人的运维/add_label.png)
+![](./assets/一个人的运维/add_label.png)
 
 然后在部署服务时，配置服务必须在具备此 Label 的节点上部署：
 
-![](./assets//一个人的运维/set_label.png)
+![](./assets/一个人的运维/set_label.png)
 
 此服务会自动的部署在有此`Label`工作节点之上。当此工作节点无法使用的时候，删除此节点再添加一个新的节点并设定好 Label，集群会自动的将服务从旧的节点移至新的节点上。
 
