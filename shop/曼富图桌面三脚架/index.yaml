@@ -1,0 +1,12 @@
+coverImage: ./assets/1.jpg
+title: 曼富图桌面三脚架
+skus:
+  - name: 曼富图桌面三脚架
+    stock: 1
+    condition: "轻微使用痕迹，有划痕"
+    price: 90
+    images:
+      - ./assets/1.jpg
+    purchase:
+      price: 195.6
+      date: "2019-11-11"

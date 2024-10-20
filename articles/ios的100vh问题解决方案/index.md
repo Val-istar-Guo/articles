@@ -58,7 +58,7 @@ tags:
 </html>
 ```
 
-![Body 100%](./assets/ios的100vh问题解决方案/full.png "Body 100%")
+![Body 100%](./assets/full.png "Body 100%")
 
 如果将`body`设置为`100vh`高度，在 WebApp 中不会存在问题，但是在 safari 中会出现滚动条。
 
@@ -74,7 +74,7 @@ tags:
 </html>
 ```
 
-![Body 100vh](./assets/ios的100vh问题解决方案/screen.png "Body 100vh")
+![Body 100vh](./assets/screen.png "Body 100vh")
 
 ## 解决方案
 
