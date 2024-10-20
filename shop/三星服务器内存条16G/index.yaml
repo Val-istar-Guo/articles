@@ -1,0 +1,12 @@
+coverImage: ./assets/1.jpg
+title: 三星服务器内存条16G
+skus:
+  - name: S1LCA3085039FB4518
+    description: 16GB 2Rx8 PC4-2666V-RE2-12-MA0
+    stock: 1
+    condition: "基本未使用"
+    price: 128
+    images:
+      - ./assets/1.jpg
+    purchase:
+      date: "2020-09-08"

@@ -1,0 +1,12 @@
+coverImage: ./assets/1.jpg
+title: TypeC转TypeC右弯线（1m）
+skus:
+  - name: 1m
+    stock: 1
+    condition: "全新"
+    price: 5
+    images:
+      - ./assets/1.jpg
+    purchase:
+      freebies: true
+      date: "2020-09-08"

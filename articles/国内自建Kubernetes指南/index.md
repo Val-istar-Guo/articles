@@ -63,7 +63,7 @@ Kubelet 通过 CRI (Container Runtime Interface 容器运行时接口）创建�
 > **高级容器运行时（High Level）工具**相比 **低级容器运行时（Low Level）工具** 实现了镜像管理、gRPC 等高级功能。
 > 除了`runc`，还有`runv`、`crun`、`gVisor`等**低级容器运行时（Low Level）工具**。
 
-![Kubernetes](./assets/国内自建Kubernetes指南/kubernetes.png "Kubernetes")
+![Kubernetes](./assets/kubernetes.png "Kubernetes")
 
 > `containerd`是 Docker 公司捐赠给 CNCF 的。`runc`也是 Docker 公司捐赠给 OCI 的。
 
@@ -408,7 +408,7 @@ Istio 是一个开源的**服务网格**。它能够实现负载均衡、故障�
 
 > 如果仅仅是用来作为入口网关，我们还可以选择 Nginx、ApiSix 等。读者可以更加深入的了解 Istio 与 Nginx 等其他反向代理服务的区别后，再决定是否部署 Istio。
 
-![Istio](./assets/国内自建Kubernetes指南/istio.png "Istio")
+![Istio](./assets/istio.png "Istio")
 
 > - 入口网关（Ingress Gateway）也是 Envoy。
 > - Envoy 是一个高性能的七层网络代理服务。

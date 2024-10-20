@@ -1,0 +1,14 @@
+coverImage: ./assets/1.jpg
+title: 固特异车载香片
+tags:
+  - brand-new
+skus:
+  - name: 铃蓝好柿
+    stock: 1
+    condition: "全新"
+    price: 3
+    images:
+      - ./assets/1.jpg
+    purchase:
+      freebies: true
+      date: "2024-09-13"

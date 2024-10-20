@@ -45,7 +45,7 @@ tags:
 >   阿里云中可以手动创建*专有网络*；腾讯云可以手动创建*私有网络*。
 >   阿里云和腾讯云只是命名不一样，并且都是免费的。
 
-![architecture](./assets/搭建在wireguard上的kubernetes/architecture.png)
+![architecture](./assets/architecture.png)
 
 南京三台主机分别编号：N1(172.16.0.1)、N2(172.16.0.2)、N3(172.16.0.3)；
 上海一台主机编号：S1(172.16.128.1)。
