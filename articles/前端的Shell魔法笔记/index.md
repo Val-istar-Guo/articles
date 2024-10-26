@@ -1,6 +1,7 @@
 ---
 published: true
 description: 我总结的一些实用的Shell脚本。
+date: 2024-01-07
 tags:
   - 前端
 ---

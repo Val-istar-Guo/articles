@@ -1,6 +1,7 @@
 ---
 published: true
 description: 本文记录了在国内Kubernetes集群部署OpenEBS需要调整的配置和注意事项
+date: 2024-02-15
 tags:
   - 中间件
   - Kubernetes

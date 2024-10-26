@@ -1,6 +1,7 @@
 ---
 published: true
 description: 如何给 Kubernetes 集群缴最低的流量费
+date: 2024-02-18
 tags:
   - Kubernetes
 ---

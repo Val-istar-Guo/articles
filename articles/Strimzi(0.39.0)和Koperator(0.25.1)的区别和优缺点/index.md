@@ -1,6 +1,7 @@
 ---
 published: true
 description: Strimzi 和 Koperator 是最热门的两个Kafka Operator。我部署并使用它俩的基本功能，并总结其优缺点。希望后来的小伙伴们不再需要为了寻找最适合自己的方案，而像我一样将两条路都走一遍。
+date: 2024-01-16
 tags:
   - 中间件
   - Kubernetes

@@ -1,6 +1,7 @@
 ---
 published: true
 description: 在移动端Safari中拖动遮照层会导致被其遮挡的列表滚动，这种行为就像是滚动事件穿透了遮照层一样，本文是我解决此问题的方案。
+date: 2024-02-23
 tags:
   - 前端
   - Bug

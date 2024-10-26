@@ -1,6 +1,7 @@
 ---
 published: true
 description: 如果你是三方库的开发者，优雅的处理这个问题并不简单。
+date: 2024-09-06
 tags:
   - 前端
 ---

@@ -1,6 +1,7 @@
 ---
 published: true
 description: 我想带你看看npm的install和publish的基本原理。
+date: 2024-03-19
 tags:
   - 前端
 ---

@@ -1,6 +1,7 @@
 ---
 published: true
 description: 本文记载家中搭建OpenWRT的详细过程及沉淀的技术方案。所谓“智能”只是噱头罢了。
+date: 2021-08-10
 tags:
   - 智能家居
   - 路由器

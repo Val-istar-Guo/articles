@@ -1,6 +1,7 @@
 ---
 published: true
 description: Picker 作为 DataPicker 中的一列。它的质量，决定了 DataPicker 的质量。也是最复杂的一部分。
+date: 2018-11-11
 tags:
   - 前端
 ---

@@ -1,6 +1,7 @@
 ---
 published: true
 description: JS有实现循环的可以即使用for，也可以使用map、filter。for的性能比map好就应该选择for吗？
+date: 2024-02-25
 tags:
   - 前端
 ---

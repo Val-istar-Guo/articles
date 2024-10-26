@@ -1,6 +1,7 @@
 ---
 published: true
 description: 在云服务上部署Harbor是比较昂贵的。用租一年云服务的钱购买一台Nas部署Harbor，就显得尤为划算。
+date: 2024-01-17
 tags:
   - 中间件
   - Harbor
