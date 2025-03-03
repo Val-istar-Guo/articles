@@ -87,3 +87,11 @@ EOF
 echo $V1 # my_variable1
 echo $V2 # my_variable2
 ```
+
+## 永不退出的 bash
+
+永远不会退出，适用于调适 dockerfile。
+
+```bash
+tail -f /dev/null
+```
