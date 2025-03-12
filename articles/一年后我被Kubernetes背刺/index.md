@@ -58,3 +58,5 @@ kubeadm certs renew all
 > This feature is designed for addressing the simplest use cases; if you don't have specific requirements on certificate renewal and perform Kubernetes version upgrades regularly (less than 1 year in between each upgrade), kubeadm will take care of keeping your cluster up to date and reasonably secure.
 
 **意思是如果你每年都更新 Kubernetes 集群的版本，那么证书也将会自动更新。** 这可能就是为什么在部署的教程中，没有任何有关证书过期时间警告的原因吧。
+
+最后，记得更新 `~/.kube/config`: `cp -f /etc/kubernetes/admin.conf $HOME/.kube/config`。
